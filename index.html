@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<style>
+    /* main.css */
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e6e6fa;  /* Lavender Background */
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #6a5acd;  /* Lavender Text Color */
+        text-align: center;
+        margin-top: 60px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        gap: 30px;
+    }
+
+    button {
+        background-color: #fff;  /* White Button Color */
+        color: #6a5acd;  /* Lavender Text Color */
+        border: 2px solid #6a5acd;  /* Lavender Border */
+        border-radius: 50px; /* Pill-shaped button */
+        padding: 15px 30px;
+        margin: 0 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        font-size: 1em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    button:hover {
+        background-color: #6a5acd;  /* Lavender Button Color on Hover */
+        color: #fff;  /* White Text Color on Hover */
+        transform: translateY(-3px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    a {
+        text-decoration: none;
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+    }
+
+    a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, #fff, transparent);
+        transition: left 0.3s;
+        z-index: -1;
+    }
+
+    a:hover::before {
+        left: 100%;
+    }
+
+</style>
+
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <div>
+        <a href="/manage-customers"><button>Manage Customers</button></a>
+        <a href="/manage-products"><button>Manage Products</button></a>
+        <a href="/manage-sales"><button>Manage Sales</button></a>
+        <a href="/dashboard"><button>Dashboard</button></a>
+    </div>
+</body>
+
+</html>

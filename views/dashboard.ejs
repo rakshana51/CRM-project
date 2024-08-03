@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <div>
+        <div>
+            <p>Total Sales: $<%= dashboardData.totalSales %></p>
+        </div>
+        <div>
+            <p>Total Customers: <%= dashboardData.totalCustomers %></p>
+        </div>
+        <div>
+            <p>Total Products Sold: <%= dashboardData.totalProductsSold %></p>
+        </div>
+    </div>
+
+    <div>
+        <canvas id="salesChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Embed the data in a hidden element -->
+    <div id="salesData" data-sales='<%= JSON.stringify(dashboardData.salesByDate) %>' style="display:none;"></div>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon"></script>
+    <!-- Include Chart.js Date Adapter for Luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            
+            // Retrieve and parse the data from the hidden element
+            const salesDataElement = document.getElementById('salesData');
+            const salesData = JSON.parse(salesDataElement.getAttribute('data-sales'));
+
+            console.log('Sales Data:', salesData); // Debugging log
+
+            const labels = salesData.map(item => item.sale_date);
+            const data = salesData.map(item => item.total_sales);
+
+            console.log('Labels:', labels); // Debugging log
+            console.log('Data:', data); // Debugging log
+
+            const salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Sales',
+                        data: data,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
